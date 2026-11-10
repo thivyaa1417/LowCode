@@ -1,0 +1,1898 @@
+/*
+ * Author       : thivyaa.p.2024.cse_rajala183
+ * Generated on : 10-Nov-2026 11:33:34
+ * Version      : 1.0
+ */
+ application "PG and Hostel Management System"
+ {
+ 	date format = "dd-MMM-yyyy"
+ 	time zone = "Asia/Kolkata"
+ 	time format = "24-hr"
+
+ 	forms
+	{
+		form Allocation
+		{
+			success message = "Allocation Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			must have Check_In_Date
+			(
+    			type = date
+				displayname = "Check In Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Check_Out_Date
+			(
+    			type = date
+				displayname = "Check Out Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Resident
+			(
+				type = picklist	
+				values  = Resident.ID
+    			displayformat = [" " + Name.prefix + " " + Name.first_name + " " + Name.last_name + " " + Name.suffix]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Room
+			(
+				type = picklist	
+				values  = Room.ID
+    			displayformat = [Room_Number]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Deposit_Paid
+			(
+				type = decimal
+				displayname = "Deposit Paid"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form Complaint
+		{
+			success message = "Complaint Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			Description
+			(
+    			type = textarea
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Category
+			(
+				type = picklist
+				maxchar = 100
+				values = {"Electrical","Plumbing","Cleaning"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Resident
+			(
+				type = picklist	
+				values  = Resident.ID
+    			displayformat = [" " + Name.prefix + " " + Name.first_name + " " + Name.last_name + " " + Name.suffix]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Status
+			(
+				type = picklist
+				maxchar = 100
+				values = {"Open","In Progress","Resolved"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form Payment
+		{
+			success message = "Payment Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			Month_field
+			(
+    			type = text
+				displayname = "Month"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Payment_Date
+			(
+    			type = date
+				displayname = "Payment Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Mode
+			(
+				type = picklist
+				maxchar = 100
+				values = {"Cash","UPI","Card"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Status
+			(
+				type = picklist
+				maxchar = 100
+				values = {"Paid","Pending","Partial"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Amount_Paid
+			(
+				type = decimal
+				displayname = "Amount Paid"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Resident
+			(
+				type = picklist	
+				values  = Resident.ID
+    			displayformat = [" " + Name.prefix + " " + Name.first_name + " " + Name.last_name + " " + Name.suffix]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Room
+			(
+				type = picklist	
+				values  = Room.ID
+    			displayformat = [Room_Number]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Balance_Due
+			(
+				type = decimal
+				displayname = "Balance Due"
+	 			row = 1
+	 			column = 1   
+				width = medium
+    			Formula_Properties
+    			(
+    						value =  input.Room.Monthly_Rent - input.Amount_Paid
+    						visibility = true
+    			)
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form Resident
+		{
+			success message = "Resident Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			Name
+			(
+    			type = name
+     			prefix
+     			(
+	     			 type = prefix
+	     			 displayname ="Prefix"
+	     			 visibility = false
+	     			 value = {"Mr.","Mrs.","Ms."}
+     			) 
+     			first_name
+     			(
+	     			 type = first_name
+	     			 displayname ="First Name"
+     			) 
+     			last_name
+     			(
+	     			 type = last_name
+	     			 displayname ="Last Name"
+     			) 
+     			suffix
+     			(
+	     			 type = suffix
+	     			 displayname ="Suffix"
+	     			 visibility = false
+     			) 
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			must have unique Email
+			(
+    			type = email
+				maxchar = 80
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			must have Phone_Number
+			(
+    			type = phonenumber
+				displayname = "Phone"
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			Guardian_Name
+			(
+    			type = text
+				displayname = "Guardian Name"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Guardian_Phone
+			(
+    			type = phonenumber
+				displayname = "Guardian Phone"
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			ID_Type
+			(
+				type = picklist
+				displayname = "ID Type"
+				maxchar = 100
+				values = {"Aadhaar","Passport","Driving Licence"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Gender
+			(
+				type = radiobuttons
+				maxchar = 100
+				values = {"Male","Female","Other"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form Room
+		{
+			success message = "Room Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			must have unique Room_Number
+			(
+    			type = text
+				displayname = "Room Number"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Building_FloorBuilding_Floor
+			(
+    			type = text
+				displayname = "Building Floor"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Room_Type
+			(
+				type = picklist
+				displayname = "Room Type"
+				maxchar = 100
+				values = {"Single","Double","Triple"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Monthly_Rent
+			(
+				type = decimal
+				displayname = "Monthly Rent"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Status
+			(
+				type = picklist
+				maxchar = 100
+				values = {"Available","Occupied","Under Maintenance"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Capacity
+			(
+				type = number
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form Visitor_Log
+		{
+			displayname = "Visitor Log"
+			success message = "Data Added Successfully!"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			must have Visitor_Name
+			(
+    			type = text
+				displayname = "Visitor Name"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			In_Time
+			(
+    			type = datetime
+				displayname = "In Time"
+				timedisplayoptions = "hh:mm:ss"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Out_Time
+			(
+    			type = datetime
+				displayname = "Out Time"
+				timedisplayoptions = "hh:mm:ss"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Resident
+			(
+				type = picklist	
+				values  = Resident.ID
+    			displayformat = [" " + Name.prefix + " " + Name.first_name + " " + Name.last_name + " " + Name.suffix]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+	}
+	reports
+	{
+		default list All_Residents
+		{
+			displayName = "All Residents"
+			show all rows from Resident    
+			(
+				Name 
+				Email
+				Phone_Number as "Phone"
+				(
+					displayformat = plainnumber 
+				)
+				Guardian_Name as "Guardian Name"
+				Guardian_Phone as "Guardian Phone"
+				(
+					displayformat = plainnumber 
+				)
+				ID_Type as "ID Type"
+				Gender
+			)
+		}
+		default list All_Room
+		{
+			displayName = "All Room"
+			show all rows from Room    
+			(
+				Room_Number as "Room Number"
+				Building_FloorBuilding_Floor as "Building Floor"
+				Room_Type as "Room Type"
+				Capacity
+				Monthly_Rent as "Monthly Rent"
+				Status
+			)
+		}
+		default list All_Allocations
+		{
+			displayName = "All Allocations"
+			show all rows from Allocation    
+			(
+				Check_In_Date as "Check In Date"
+				Check_Out_Date as "Check Out Date"
+				Resident
+				Room
+				Deposit_Paid as "Deposit Paid"
+			)
+		}
+		default list All_Payments
+		{
+			displayName = "All Payments"
+			show all rows from Payment    
+			(
+				Month_field as "Month"
+				Payment_Date as "Payment Date"
+				Mode
+				Status
+				Amount_Paid as "Amount Paid"
+				Resident
+				Room
+				Balance_Due as "Balance Due"
+			)
+		}
+		default list All_Complaints
+		{
+			displayName = "All Complaints"
+			show all rows from Complaint    
+			(
+				Description
+				Category
+				Status
+				Resident
+			)
+		}
+		default list Visitor_Log_Report
+		{
+			displayName = "Visitor Log Report"
+			show all rows from Visitor_Log    
+			(
+				Visitor_Name as "Visitor Name"
+				In_Time as "In Time"
+				Out_Time as "Out Time"
+				Resident
+			)
+		}
+		list Pending_Payments
+		{
+			displayName = "Pending Payments"
+			show all rows from Payment  [Status == "Pending"]  
+			(
+				Month_field as "Month"
+				Payment_Date as "Payment Date"
+				Mode
+				Status
+				Amount_Paid as "Amount Paid"
+				Resident
+				Room
+				Balance_Due as "Balance Due"
+			)
+			sort by
+			(
+				Balance_Due descending
+			)
+		}
+		list Room_Occupancy
+		{
+			displayName = "Room Occupancy"
+			show all rows from Room    
+			(
+				Room_Number as "Room Number"
+				Building_FloorBuilding_Floor as "Building Floor"
+				Room_Type as "Room Type"
+				Monthly_Rent as "Monthly Rent"
+				Status
+				Capacity
+			)
+		}
+	}
+	pages
+	{
+		page Dashboard
+		{
+			displayname = "Dashboard"
+			Content="<zml    \t\t\n\t\t\n\t\t\n\t\t\n\t\t\n>\n\t<layout>\n\t<row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<chart \n\telementName='Occupancy by Room Type'\n\n\ttype = 'Column'\n\tbgColor = '#FFFFFF'\n\ttheme = 'theme1'\n\tlegendPos = 'center.top'\n\theightType = 'auto'\n\theightValue = '300px'\n\tappLinkName = 'thisapp'\n\tformLinkName = 'Room'\n\txfield = 'Room_Type'\n\tyfields = 'count:Room_Number'\n/>\n\n</column>\n</row><row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<chart \n\telementName='Payments by Status'\n\n\ttype = 'Column'\n\tbgColor = '#FFFFFF'\n\ttheme = 'theme1'\n\tlegendPos = 'center.top'\n\theightType = 'auto'\n\theightValue = '300px'\n\tappLinkName = 'thisapp'\n\tformLinkName = 'Payment'\n\txfield = 'Status'\n\tyfields = 'count:Month_field'\n/>\n\n</column>\n</row><row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<chart \n\telementName='Complaints by Status'\n\n\ttype = 'Column'\n\tbgColor = '#FFFFFF'\n\ttheme = 'theme1'\n\tlegendPos = 'center.top'\n\theightType = 'auto'\n\theightValue = '300px'\n\tappLinkName = 'thisapp'\n\tformLinkName = 'Complaint'\n\txfield = 'Status'\n\tyfields = 'count:ID'\n/>\n\n</column>\n</row><row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<report \n\telementName='Report'\n\n\t\tappLinkName = 'thisapp'\n\t\tlinkName = 'Pending_Payments'\n\t\n\t\tiszreport = 'false'\n\theightType = 'auto'\n\theightValue = '700'\n/>\n</column>\n</row>\n</layout>\n</zml>"
+		}
+	}
+
+
+
+
+		workflow
+		{
+		form
+		{
+			Validate_Allocation as "Validate Allocation"
+			{
+				type =  form
+				form = Allocation
+
+				record event = on add
+
+				on validate
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											// Validation 1: check-out date must not be earlier than check-in date
+										if(input.Check_Out_Date != null && input.Check_Out_Date < input.Check_In_Date)
+										{
+											alert "Check-out date cannot be earlier than the check-in date.";
+											cancel submit;
+										}
+										// Validation 2: block the allocation if the room is not Available or is already full
+										roomRec = Room[ID == input.Room];
+										if(roomRec.Status != "Available")
+										{
+											alert "This room cannot be allocated. Room status is: " + roomRec.Status;
+											cancel submit;
+										}
+										currentCount = Allocation[Room == input.Room && Check_Out_Date == null].count();
+										if(currentCount >= roomRec.Capacity)
+										{
+											alert "This room is already full. Capacity: " + roomRec.Capacity;
+											cancel submit;
+										}
+						)
+					}
+				}
+
+			}
+			Validate_Payment as "Validate Payment"
+			{
+				type =  form
+				form = Payment
+
+				record event = on add
+
+				on validate
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											// Validation: payment amount must be greater than 0
+										if(input.Amount_Paid <= 0)
+										{
+											alert "Amount paid must be greater than 0.";
+											cancel submit;
+										}
+						)
+					}
+				}
+
+			}
+			Update_Room_Status as "Update Room Status"
+			{
+				type =  form
+				form = Allocation
+
+				record event = on add
+
+				on success
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											// After a successful allocation: mark the room Occupied once it is full
+										roomRec = Room[ID == input.Room];
+										activeCount = Allocation[Room == input.Room && Check_Out_Date == null].count();
+										if(activeCount >= roomRec.Capacity)
+										{
+											roomRec.Status="Occupied";
+										}
+						)
+					}
+				}
+
+			}
+			Complaint_Email_Alert as "Complaint Email Alert"
+			{
+				type =  form
+				form = Complaint
+
+				record event = on add
+
+				on success
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											// Notify the app admin (only) when a complaint is created
+										sendmail
+										[
+											from :zoho.adminuserid
+											to :zoho.adminuserid
+											subject :"New hostel complaint: " + input.Category
+											message :"A new complaint was registered. Category: " + input.Category + ". Description: " + input.Description + ". Status: " + input.Status
+										]
+						)
+					}
+				}
+
+			}
+		}
+
+		schedule
+		{
+			Weekly_Rent_Due_Reminder as "Weekly Rent Due Reminder"
+			{
+				type =  schedule
+					status = inactive
+				start = "2026-11-02 09:00:00"
+				frequency = weekly
+				time zone = "Asia/Kolkata"
+				on start
+				{
+					actions 
+					{
+					on load
+					(
+						// Weekly rent-due reminder sent to the app admin only
+										pendingList = Payment[Status == "Pending"];
+										cnt = pendingList.count();
+										total = 0;
+										for each  p in pendingList
+										{
+											total = total + ifnull(p.Balance_Due,0);
+										}
+										sendmail
+										[
+											from :zoho.adminuserid
+											to :zoho.adminuserid
+											subject :"Weekly rent due reminder"
+											message :"Pending payments: " + cnt + ". Total balance due: " + total
+										]
+					)
+					}
+				}
+			}
+		}
+
+		approval
+		{
+			Resident_Registration_App as "Resident Registration Approval"
+			{
+				type =  approval
+				form = Resident
+				display fields = [Name,Email,Phone_Number,Guardian_Name,Guardian_Phone,ID_Type,Gender]
+				on start
+				{
+				}
+				on level 1
+				{
+					on approve 
+					{
+						actions 
+						{
+							sendmail
+							(
+								from : zoho.loginuserid
+								to : approver.submitter
+								subject : "Approval Request"
+								message : "Your request has been approved."
+							)
+						}
+					}
+					on reject
+					{
+
+						actions 
+						{
+							sendmail
+							(
+								from : zoho.loginuserid
+								to : approver.submitter
+								subject : "Approval Request"
+								message : "Your request has been rejected."
+							)
+						}
+					}
+				}
+			}
+		}
+
+
+
+	}
+	share_settings
+	{
+			"Read"
+			{
+				name = "Read"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have read permission for all components\n"
+			}
+			"Write"
+			{
+				name = "Write"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have write permission for all components\n"
+			}
+			"Administrator"
+			{
+				name = "Administrator"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have all the permissions.\n"
+			}
+			"Warden"
+			{
+				name = "Warden"
+				type = Users_Permissions
+				permissions = {Chat:false, Predefined:false, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "Warden - can open all hostel forms and the dashboard\n"
+				ModulePermissions
+				{
+					Payment
+					{
+						enabled= Create,Tab 
+						allFieldsVisible= true 
+					}
+					Allocation
+					{
+						enabled= Create,Tab 
+						allFieldsVisible= true 
+					}
+					Resident
+					{
+						enabled= Create,Tab 
+						allFieldsVisible= true 
+					}
+					Complaint
+					{
+						enabled= Create,Tab 
+						allFieldsVisible= true 
+					}
+					Room
+					{
+						enabled= Create,Tab 
+						allFieldsVisible= true 
+					}
+					Visitor_Log
+					{
+						enabled= Create,Tab 
+						allFieldsVisible= true 
+					}
+					Dashboard
+					{
+						enabled = tab
+					}
+				}
+			}
+			"Resident"
+			{
+				name = "Resident"
+				type = Users_Permissions
+				permissions = {Chat:false, Predefined:false, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "Resident - can raise complaints and view the dashboard\n"
+				ModulePermissions
+				{
+					Payment
+					{
+						allFieldsVisible= true 
+					}
+					Allocation
+					{
+						allFieldsVisible= true 
+					}
+					Resident
+					{
+						allFieldsVisible= true 
+					}
+					Complaint
+					{
+						enabled= Create,Tab 
+						allFieldsVisible= true 
+					}
+					Room
+					{
+						allFieldsVisible= true 
+					}
+					Visitor_Log
+					{
+						allFieldsVisible= true 
+					}
+					Dashboard
+					{
+						enabled = tab
+					}
+				}
+			}
+			"Developer"
+			{
+				name = "Developer"
+				type = Developer
+				permissions = {Chat:false, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "Developer Profile\n"
+			}
+			"Customer"
+			{
+				name = "Customer"
+				type = Customer_Portal
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This is the default profile having only add and view permission.\n"
+			}
+			roles
+			{
+				"CEO"
+				{
+					description = "User belonging to this role can access data of all other users."
+					"Warden"
+					{
+						description = ""
+						"Resident"
+						{
+							description = ""
+						}
+					}
+				}
+			}
+	}
+
+	customize
+	{
+		icon
+		{
+			text = "PAH"
+			background color = "theme"
+			foreground color = "#ffffff"
+		}
+	}
+
+	web
+	{
+		forms
+		{
+			form Allocation
+			{
+				label placement = left
+			}
+			form Complaint
+			{
+				label placement = left
+			}
+			form Payment
+			{
+				label placement = left
+			}
+			form Resident
+			{
+				label placement = left
+			}
+			form Room
+			{
+				label placement = left
+			}
+			form Visitor_Log
+			{
+				label placement = left
+			}
+		}
+		reports
+		{
+			report All_Residents
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Name
+								Email
+								Phone_Number as "Phone"
+								Guardian_Name as "Guardian Name"
+								Guardian_Phone as "Guardian Phone"
+								ID_Type as "ID Type"
+								Gender
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Name
+								Email
+								Phone_Number as "Phone"
+								Guardian_Name as "Guardian Name"
+								Guardian_Phone as "Guardian Phone"
+								ID_Type as "ID Type"
+								Gender
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report All_Room
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Room_Number as "Room Number"
+								Building_FloorBuilding_Floor as "Building Floor"
+								Room_Type as "Room Type"
+								Capacity
+								Monthly_Rent as "Monthly Rent"
+								Status
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Room_Number as "Room Number"
+								Building_FloorBuilding_Floor as "Building Floor"
+								Room_Type as "Room Type"
+								Capacity
+								Monthly_Rent as "Monthly Rent"
+								Status
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report All_Allocations
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Check_In_Date as "Check In Date"
+								Check_Out_Date as "Check Out Date"
+								Resident
+								Room
+								Deposit_Paid as "Deposit Paid"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Check_In_Date as "Check In Date"
+								Check_Out_Date as "Check Out Date"
+								Resident
+								Room
+								Deposit_Paid as "Deposit Paid"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report All_Payments
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Month_field as "Month"
+								Payment_Date as "Payment Date"
+								Mode
+								Status
+								Amount_Paid as "Amount Paid"
+								Resident
+								Room
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Month_field as "Month"
+								Payment_Date as "Payment Date"
+								Mode
+								Status
+								Amount_Paid as "Amount Paid"
+								Resident
+								Room
+								Balance_Due as "Balance Due"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report All_Complaints
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Description
+								Category
+								Status
+								Resident
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Description
+								Category
+								Status
+								Resident
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report Visitor_Log_Report
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Visitor_Name as "Visitor Name"
+								In_Time as "In Time"
+								Out_Time as "Out Time"
+								Resident
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Visitor_Name as "Visitor Name"
+								In_Time as "In Time"
+								Out_Time as "Out Time"
+								Resident
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report Pending_Payments
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Month_field as "Month"
+								Payment_Date as "Payment Date"
+								Mode
+								Status
+								Amount_Paid as "Amount Paid"
+								Resident
+								Room
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Month_field as "Month"
+								Payment_Date as "Payment Date"
+								Mode
+								Status
+								Amount_Paid as "Amount Paid"
+								Resident
+								Room
+								Balance_Due as "Balance Due"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report Room_Occupancy
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Room_Number as "Room Number"
+								Building_FloorBuilding_Floor as "Building Floor"
+								Room_Type as "Room Type"
+								Monthly_Rent as "Monthly Rent"
+								Status
+								Capacity
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Room_Number as "Room Number"
+								Building_FloorBuilding_Floor as "Building Floor"
+								Room_Type as "Room Type"
+								Monthly_Rent as "Monthly Rent"
+								Status
+								Capacity
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+		}
+		menu
+		{
+			space Space
+			{
+				displayname = "Space"
+				icon = "objects-spaceship"
+
+				section Residents
+				{
+					displayname = "Residents"
+					icon = "users-2-wc"
+					form  Resident
+					{
+						icon = "health-doctor"
+					}
+					report All_Residents
+					{
+						icon = "tech-desktop"
+					}
+				}
+				section ZC_App_Preferences
+				{
+					displayname = "App Preferences"
+					icon = "design-app"
+					systemcomponent
+					{
+						type = localization
+						displayname = "Language Selection"
+						icon = "education-language"
+					}
+					systemcomponent
+					{
+						type = connection
+						displayname = "Integrations"
+						icon = "tech-2-connection"
+					}
+				}
+				section ZC_Approvals
+				{
+					displayname = "Approvals"
+					icon = "ui-2-hourglass"
+					systemcomponent
+					{
+						type = approval
+						approval status = pending
+						displayname = "Pending Tasks"
+						icon = "ui-2-hourglass"
+					}
+					systemcomponent
+					{
+						type = approval
+						approval status = completed
+						displayname = "Completed Tasks"
+						icon = "design-todo"
+					}
+				}
+				section SharedAnalytics_Section
+				{
+					type = shared_user_report_section
+					displayname = "Reports"
+					icon = "business-chart-bar-33"
+				}
+				section Room
+				{
+					displayname = "Room"
+					icon = "furniture-table"
+					form  Room
+					{
+						icon = "furniture-table"
+					}
+					report All_Room
+					{
+						icon = "tech-desktop"
+					}
+					report Room_Occupancy
+					{
+						icon = "furniture-table"
+					}
+				}
+				section Allocations
+				{
+					displayname = "Allocations"
+					icon = "business-money-coins"
+					form  Allocation
+					{
+						icon = "business-money-growth"
+					}
+					report All_Allocations
+					{
+						icon = "tech-desktop"
+					}
+				}
+				section Payments
+				{
+					displayname = "Payments"
+					icon = "shopping-credit-card-in"
+					form  Payment
+					{
+						icon = "shopping-receipt"
+					}
+					report All_Payments
+					{
+						icon = "tech-desktop"
+					}
+					report Pending_Payments
+					{
+						icon = "shopping-receipt"
+					}
+				}
+				section Complaints
+				{
+					displayname = "Complaints"
+					icon = "tech-headphones"
+					form  Complaint
+					{
+						icon = "tech-headphones"
+					}
+					report All_Complaints
+					{
+						icon = "tech-desktop"
+					}
+				}
+				section Visitor_Log
+				{
+					displayname = "Visitor Log"
+					icon = "users-single-02"
+					form  Visitor_Log
+					{
+						icon = "users-single-02"
+					}
+					report Visitor_Log_Report
+					{
+						icon = "tech-desktop"
+					}
+				}
+				section Dashboard
+				{
+					displayname = "Dashboard"
+					icon = "ui-1-dashboard-half"
+					page Dashboard
+					{
+						icon = "ui-1-dashboard-half"
+					}
+				}
+			}
+			preference
+			{
+				icon
+				{
+					style = outline
+				}
+			}
+		}
+		customize
+		{
+			font = "lato"
+			color options
+			{
+				color = "11"
+			}
+			logo
+			{
+				preference = "app_icon"
+				placement = "left"
+			}
+		}
+	}
+	phone
+	{
+		customize
+		{
+			layout = twocolumn
+			font = "default"
+			style = "1"
+			color options
+			{
+				color = chryslerpurple
+			}
+			logo
+			{
+				preference = "none"
+			}
+		}
+	}
+	tablet
+	{
+		customize
+		{
+			layout = slidingpane
+			font = "default"
+			style = "1"
+			color options
+			{
+				color = darkgrey
+			}
+			logo
+			{
+				preference = "none"
+			}
+		}
+	}
+	translation
+{
+{"Language_Settings":{"LANGAGUE_WITH_LOGIN":"browser"}}
+}
+}
